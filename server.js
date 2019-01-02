@@ -1,6 +1,7 @@
 const express=require('express');
 const hbs=require('hbs');
 var app=express();
+const port=process.env.PORT || 3000;
 app.set('view engine','hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + '/public'));
@@ -17,6 +18,7 @@ app.get('/',(req,res)=>{
 })
 app.get('/login',(req,res)=>{
     res.render('login.hbs',{
+        
         head:"Login",
         email:'Email_Id',
         password:'Password'
@@ -25,11 +27,11 @@ app.get('/login',(req,res)=>{
 app.get('/chat',(req,res)=>{
    // res.send("Home page");
    res.render('home.hbs',{
-       title:"Welcome to the chatting world"
+       title:"ProChat"
    });
 
 });
 
-app.listen(3000,()=>{
-    console.log(`server is up on the port 3000`);
+app.listen(port,()=>{
+    console.log(`server is up on the port ${port}`);
 })
