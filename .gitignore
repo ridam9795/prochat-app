@@ -1,1 +1,16 @@
-node_modules
+node_modules,  database/database/WiredTiger.lock,
+        database/WiredTiger.turtle,
+        database/WiredTiger.wt,
+        database/WiredTigerLAS.wt,
+        database/_mdb_catalog.wt,
+        database/collection-0--1273078137664103121.wt,
+        database/collection-2--1273078137664103121.wt,
+        database/collection-4--1273078137664103121.wt,
+        database/diagnostic.data/,
+        database/index-1--1273078137664103121.wt,
+        database/index-3--1273078137664103121.wt,
+        database/index-6--1273078137664103121.wt,
+        database/journal/,
+        database/mongod.lock,
+        database/sizeStorer.wt,
+
