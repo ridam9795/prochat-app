@@ -11,6 +11,7 @@ const nodemailer=require('nodemailer');
 var {authenticate}=require('D:/Nodejs/prochat-app/middleware/authenticate.js');
 const os=require('os');
 const port=process.env.PORT || 3000;
+
 app.set('view engine','hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + '/public'));
