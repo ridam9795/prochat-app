@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
+<!--<style>
 ul {
   list-style-type: none;
   margin: 0;
@@ -35,23 +35,116 @@ li a:hover:not(.active) {
   background-color: #4CAF50;
 }
 </style>
+-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color:rgb(111, 185, 145);
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color:brown;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: brown;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color:lemonchiffon;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color:red;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
 </head>
 <body>
 
-<div style="position: absolute; top:10px; left:20px; right:5px; color:#d47a30;"  >
+<div class="navbar">
+  <a href="../chat">Home</a>
+  <a href="#contact">Contact</a>
+    <a href="../" style="position:absolute;right:10px;">Register</a>
+        <a  href="/login" style="position:absolute;right:100px;">{{Login}}</a>
+  <!-- <div style="position:absolute;right:200px;top:30px;color:yellow">{{loggedin}}</div>-->
+            <a href="/logout" style="position:absolute;right:175px;color:red">{{Logout}}</a>
+
+  <div class="dropdown">
+    <button class="dropbtn"  style="position:absolute;right:200px;">{{loggedin}} 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content" style="position:absolute;right:200px;top:50px;">
+      <a href="#" >{{link1}}</a>
+      <a href="#">{{link2}}</a>
+      <a href="#">{{link3}}</a>
+    </div>
+  </div> 
+</div>
+<!--<div style="position: absolute; top:10px; left:20px; right:5px; color:#d47a30;"  >
 <span>
 <ul>
+
   <li ><a class="active" href="../chat">Home</a></li>
   <li  ><a href="#contact">Contact</a></li>
   <li style="position:absolute;right:10px;"><a href="../">Register</a></li>
-    <li style="position:absolute;right:100px;"><a href="/login">Login</a></li>
+    <li style="position:absolute;right:100px;color:red"><a href="/login">{{Login}}</a></li>
+        <li style="position:absolute;right:400px;top:10px;color:yellow">{{loggedin}}</li>
+            <li style="position:absolute;right:175px;color:red"><a href="/logout">{{Logout}}</a></li>
+
+        
+
 
 </ul>
 </span>
 
 
 </div>
-
+-->
 
 </body>
 </html>

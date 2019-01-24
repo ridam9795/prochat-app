@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
  <style>
      button,
      button:hover{border:none;color:#fff;padding:10px}.chat__messages,
@@ -18,24 +19,28 @@
             registration
         </title>
     </head>
-     {{>header}}
+      <div style="position:absolute;top:10px;left:10px;right:10px;"> {{>header}}</div>
 
-    
+    <br>
 
-<body class="centered-form">
+<body class="centered-form" ">
 
   <div class="centered-form__form">
-    <form action="/chat.html">
+    <form action="/login" method="POST">
       <div class="form-field">
-        <h3>{{head}}<h3>
-     
+        <h3>{{head}}</h3>
+        </div>
+                          <h5 align="center" style="color:red"><b> {{message}}</b></h5>
+
+            
+
       <div class="form-field">
         <label>{{email}}</label>
-        <input type="email" name="room"/>
+        <input type="email" name="email"/>
       </div>
       <div class="form-field">
         <label>{{password}}</label>
-        <input type="password" name="room"/>
+        <input type="password" name="password"/>
       </div>
       <div class="form-field">
         <button>Login</button>

@@ -20,29 +20,32 @@
     </head>
 
     
-     {{>header}}
-
+      <div style="position:absolute;top:10px;left:10px;right:10px;"> {{>header}}</div>
+<br>
 <body class="centered-form">
-
+        
   <div class="centered-form__form">
-    <form action="/chat.html">
+    <form action="/" method="POSt" >
       <div class="form-field">
         <h3>{{head}}<h3>
       </div>
+                <h5 align="center" style="color:red"><b>{{exist}}</b></h5>
+
       <div class="form-field">
         <label>{{name}}</label>
-        <input type="text" name="name" autofocus/>
+        <input type="text" required name="name" autofocus/ >
       </div>
       <div class="form-field">
         <label>{{email}}</label>
-        <input type="email" name="room"/>
+        <input type="email" required name="email"/>
       </div>
       <div class="form-field">
         <label>{{password}}</label>
-        <input type="password" name="room"/>
+        <input type="password" name="password" required/>
+        <h6 style="color:red;">{{passlength}}</h6>
       </div><div class="form-field">
         <label>{{mob_no}}</label>
-        <input type="text" name="room"/>
+        <input type="text" name="mob_no" required/>
       </div>
       <div class="form-field">
         <button>Register</button>
