@@ -1,4 +1,4 @@
-const {users}=require('D:/Nodejs/prochat-app/database/mongoose.js');
+const {users}=require('.././database/mongoose.js');
 var authenticate = (req, res, next) => {
     var token = req.header('x-auth');
   
