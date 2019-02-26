@@ -9,7 +9,16 @@
             {{>header}}
 
     <body>
+         <h1 color="red" align="center" >
+            Welcome to to chatting world
+        </h1>
        <h2 style="position:absolute;top:100px;left:25%;color:red">{{name}} {{type}} </h2>
+ <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+ <script>
+     var socket=io();
+ </script>
+ 
+
         {{>footer}}
     </body>
 </html>

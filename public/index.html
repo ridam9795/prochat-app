@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color:rgb(111, 185, 145);
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color:brown;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: brown;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color:lemonchiffon;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color:red;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
+        <title>
+            Home page
+        </title>
+    </head>
+    <body>
+        
+<div class="navbar">
+        <a href="../chat">Home</a>
+        <a href="#contact">Contact</a>
+          <a href="/registration" style="position:absolute;right:10px;">Register</a>
+              <a  href="/login" style="position:absolute;right:100px;">Login</a>
+              </div>
+        <h1 color="red" align="center" >
+            Welcome to to chatting world
+        </h1>
+        <script src="http://localhost:3000/socket.io/socket.io.js"></script>
+        <script>
+            var socket=io();
+            //io method is available from above library
+          //When we call it we are initiating the request,we are making request from client to the server to open up a web socket
+          //and keep that connection open.
+          //This creates the connection and it stores the connection in a variable and this variable is critical to communicating.
+          //It exactly what we need in order to listen for data from server and inorder to send data to the server.
+          socket.on('connect',()=>{
+            console.log("connected to the server");
+          });
+          socket.on('disconnect',()=>{
+              console.log("Disconnected from server");
+          });
+        </script>
+        
+<div style="position: absolute; bottom: 10px; right:5px; color:#d47a30;"  >
+        <footer>
+        <h3>Copyright @Ridam ,2018</h3>
+    </footer>
+    
+        </div>
+    
+    </body>
+</html>
