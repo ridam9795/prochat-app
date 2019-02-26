@@ -1,17 +1,21 @@
 const express=require('express');
-const {mongoose}=require('D:/Nodejs/prochat-app/database/mongoose.js');
-const {users}=require('D:/Nodejs/prochat-app/database/mongoose.js');
-const {user}=require('D:/Nodejs/prochat-app/database/mongoose.js');
+const {mongoose}=require('./database/mongoose.js');
+const {users}=require('./database/mongoose.js');
+const {user}=require('./database/mongoose.js');
 const hbs=require('hbs');
 const bodyParser=require('body-parser'); 
 const app=express();
 const lodash=require('lodash');
 const bcrypt=require('bcryptjs');
 const nodemailer=require('nodemailer');
-var {authenticate}=require('D:/Nodejs/prochat-app/middleware/authenticate.js');
+var {authenticate}=require('./middleware/authenticate.js');
 const os=require('os');
 const port=process.env.PORT || 3000;
+const http=require("http");
+const socketIO=require("socket.io");
 
+var server=http.createServer(app);
+var io=socketIO(server);
 app.set('view engine','hbs');
 hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static(__dirname + '/public'));
@@ -199,7 +203,7 @@ app.get('/chat',(req,res)=>{
 
 });
 
-app.listen(port,()=>{
+server.listen(port,()=>{
     console.log(`server is up on the port ${port}`);
 })
 
