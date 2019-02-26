@@ -20,13 +20,30 @@ var server=http.createServer(app);
 var io=socketIO(server);
 //we have access to the server via server variable passed in as argument.
 //socketIO(server) return a websocket server.
-//here we can do what we want in terms emitting or listening to event
+//here we can do what we want in terms emitting or listening to event.
 io.on('connection' ,(socket)=>{
 console.log("new user connected");
+socket.emit('newEmail',{
+    to:'client@gmail.com',
+    from:'server@gmail.com',
+     createdAt:123
+});
+socket.emit('newMessage',{
+    from:"a@gmail.com",
+    text:"How are you",
+    createdAt:345
+})
+socket.on('createMessage',(message)=>{
+    console.log("message received from client",message);
+})
+socket.on('createEmail',(email)=>{
+    console.log("createEmail",email);
+})
 socket.on('disconnect',()=>{
     console.log("user was disconnected");
 })
 });
+
 //io.on let's you register an event listener,we can listen for specific event and do something when that event happens
 //we will be using one built in event called connection as an argument.This let's you listen for new connection and do something 
 //when that connection comes in.Inorder to do something we provide a callback function which is called with socket argument.

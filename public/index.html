@@ -81,22 +81,11 @@ body {
               <a  href="/login" style="position:absolute;right:100px;">Login</a>
               </div>
         <h1 color="red" align="center" >
-            Welcome to to chatting world
+            Welcome to the chatting world
         </h1>
         <script src="http://localhost:3000/socket.io/socket.io.js"></script>
-        <script>
-            var socket=io();
-            //io method is available from above library
-          //When we call it we are initiating the request,we are making request from client to the server to open up a web socket
-          //and keep that connection open.
-          //This creates the connection and it stores the connection in a variable and this variable is critical to communicating.
-          //It exactly what we need in order to listen for data from server and inorder to send data to the server.
-          socket.on('connect',()=>{
-            console.log("connected to the server");
-          });
-          socket.on('disconnect',()=>{
-              console.log("Disconnected from server");
-          });
+        <script src="./js/index.js">
+       
         </script>
         
 <div style="position: absolute; bottom: 10px; right:5px; color:#d47a30;"  >
