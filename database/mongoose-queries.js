@@ -1,7 +1,7 @@
-const {mongoose}=require('D:/Nodejs/prochat-app/database/mongoose.js');
+const {mongoose}=require('./mongoose.js');
 const {ObjectID}=require('mongodb');
-//const {user}=require('D:/Nodejs/prochat-app/database/mongoose.js');
-const {users}=require('D:/Nodejs/prochat-app/database/mongoose.js');
+
+const {users}=require('./mongoose.js');
 _id="5c39661e63229548342d67"
 if(!ObjectID.isValid(_id)){
     console.log("not valid  ID");
