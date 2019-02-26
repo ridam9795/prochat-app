@@ -4,7 +4,8 @@ const jwt=require('jsonwebtoken');
 const bcrypt=require('bcryptjs');
 
 mongoose.Promise=global.Promise;
-mongoose.connect("mongodb://localhost:27017/prochat",{useNewUrlParser:true});
+//mongoose.connect("mongodb://localhost:27017/prochat",{useNewUrlParser:true});
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/prochat");
 var userSchema=new mongoose.Schema({
     name:{
         type:String
