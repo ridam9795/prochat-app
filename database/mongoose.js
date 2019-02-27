@@ -5,8 +5,11 @@ const bcrypt=require('bcryptjs');
 
 mongoose.Promise=global.Promise;
 //mongoose.connect("mongodb://localhost:27017/prochat",{useNewUrlParser:true});
-MONGODB_URI="mongodb://ridam123:<PASSWORD>@prochat-shard-00-00-vulcd.mongodb.net:27017,prochat-shard-00-01-vulcd.mongodb.net:27017,prochat-shard-00-02-vulcd.mongodb.net:27017/test?ssl=true&replicaSet=prochat-shard-0&authSource=admin&retryWrites=true"
-mongoose.connect( process.env.MONGODB_URI|| "mongodb://localhost:27017/prochat");
+process.env.MONGODB_URI="mongodb://ridam123:ridam123@prochat-shard-00-00-vulcd.mongodb.net:27017,prochat-shard-00-01-vulcd.mongodb.net:27017,prochat-shard-00-02-vulcd.mongodb.net:27017/test?ssl=true&replicaSet=prochat-shard-0&authSource=admin&retryWrites=true"
+
+mongoose.connect( process.env.MONGODB_URI || "mongodb://localhost:27017/prochat",{useNewUrlParser:true}).catch((e)=>{
+    console.log("error",e);
+})
 var userSchema=new mongoose.Schema({
     name:{
         type:String
