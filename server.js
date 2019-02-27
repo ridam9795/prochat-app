@@ -33,8 +33,19 @@ socket.emit('newMessage',{
     text:"How are you",
     createdAt:345
 })
+//socket.emit() emits event for single connection
+//what's happening here is server receives the message from user via socket.on() and sends message to the same user via socket.emit().
 socket.on('createMessage',(message)=>{
     console.log("message received from client",message);
+    io.emit('newMessage',{
+         from:message.from,
+         text:message.text,
+         createdAt:new Date().getTime()
+    })
+    //io.emit() emits event for every single connection
+    //what's happening here is a user sends some message to the server which is received via socet.on() and 
+    //with io.emit() server sends message to all the connected user.
+    
 })
 socket.on('createEmail',(email)=>{
     console.log("createEmail",email);
