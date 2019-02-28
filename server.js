@@ -14,7 +14,7 @@ const port=process.env.PORT || 3000;
 const http=require("http");
 //this is built in module
 const socketIO=require("socket.io");
-const {generateMessage}=require("./utils/message.js");
+const {generateMessage,generateLocationMessage}=require("./utils/message.js");
 var server=http.createServer(app);
 //happens at the backside but this time we are using it here.
 var io=socketIO(server);
@@ -33,7 +33,7 @@ socket.emit('newMessage',generateMessage('Admin','Welcome to the chat app'));
 
 //socket.emit() emits event for single connection
 //what's happening here is server receives the message from user via socket.on() and sends message to the same user via socket.emit().
-socket.broadcast.emit('newMesage',generateMessage('Admin','New uesr joined'));
+socket.broadcast.emit('newMessage',generateMessage('Admin','New uesr joined'));
 socket.on('createMessage',(message,callback)=>{
     console.log("message received from client",message);
    
@@ -57,6 +57,9 @@ socket.on('createMessage',(message,callback)=>{
 // socket.on('createEmail',(email)=>{
 //     console.log("createEmail",email);
 // })
+socket.on('createLocationMessage',(coords)=>{
+    io.emit('newLocationMessage',generateLocationMessage('Admin',coords.latitude,coords.longitude));
+})
 socket.on('disconnect',()=>{
     console.log("user was disconnected");
 })
@@ -96,7 +99,7 @@ app.get('/registration',(req,res)=>{
 
 app.post('/registration',(req,res)=>{
       var body=lodash.pick(req.body,['email','password','name'])
-     
+     exists=""
     var user=new users(body);
     console.log(body);
     user.save().then((user)=>{
@@ -122,7 +125,9 @@ app.post('/registration',(req,res)=>{
         }
         if(e.errmsg){
             exists="User Already exists"
+            
         }else{
+            
             exists=""
         }
         
@@ -137,7 +142,8 @@ app.post('/registration',(req,res)=>{
         name:"name",
         email:"email Id",
         password:"Create Password",
-        mob_no:"Mob _no."
+        mob_no:"Mob _no.",
+        
     });
     })
 })
