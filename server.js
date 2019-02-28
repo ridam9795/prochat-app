@@ -14,7 +14,7 @@ const port=process.env.PORT || 3000;
 const http=require("http");
 //this is built in module
 const socketIO=require("socket.io");
-
+const {generateMessage}=require("./utils/message.js");
 var server=http.createServer(app);
 //happens at the backside but this time we are using it here.
 var io=socketIO(server);
@@ -23,33 +23,40 @@ var io=socketIO(server);
 //here we can do what we want in terms emitting or listening to event.
 io.on('connection' ,(socket)=>{
 console.log("new user connected");
-socket.emit('newEmail',{
-    to:'client@gmail.com',
-    from:'server@gmail.com',
-     createdAt:123
-});
-socket.emit('newMessage',{
-    from:"a@gmail.com",
-    text:"How are you",
-    createdAt:345
-})
+
+// socket.emit('newEmail',{
+//     to:'client@gmail.com',
+//     from:'server@gmail.com',
+//      createdAt:new Date().getTime()
+// });
+socket.emit('newMessage',generateMessage('Admin','Welcome to the chat app'));
+
 //socket.emit() emits event for single connection
 //what's happening here is server receives the message from user via socket.on() and sends message to the same user via socket.emit().
-socket.on('createMessage',(message)=>{
+socket.broadcast.emit('newMesage',generateMessage('Admin','New uesr joined'));
+socket.on('createMessage',(message,callback)=>{
     console.log("message received from client",message);
-    io.emit('newMessage',{
-         from:message.from,
-         text:message.text,
-         createdAt:new Date().getTime()
-    })
+   
+
+    io.emit('newMessage',generateMessage(message.from,message.text));
+    callback("this is from server");
+    //call back is passed here to acknowledge the client that message has been received
     //io.emit() emits event for every single connection
     //what's happening here is a user sends some message to the server which is received via socet.on() and 
     //with io.emit() server sends message to all the connected user.
-    
+    //in io.emit() sender itself receives the message.
+    // socket.broadcast.emit('newMessage',{
+    //          from:message.from,
+    //          text:message.text,
+    //          createdAt:new Date().getTime()
+    //     })
+     //this method is used to send the event to everybody but this socket which means if I fire a create message event the new message
+     //event will fire to everybody but myself
+
 })
-socket.on('createEmail',(email)=>{
-    console.log("createEmail",email);
-})
+// socket.on('createEmail',(email)=>{
+//     console.log("createEmail",email);
+// })
 socket.on('disconnect',()=>{
     console.log("user was disconnected");
 })
