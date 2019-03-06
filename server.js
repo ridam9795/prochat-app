@@ -2,9 +2,11 @@ const express=require('express');
 const {mongoose}=require('./database/mongoose.js');
 const {users}=require('./database/mongoose.js');
 const {user}=require('./database/mongoose.js');
+
 const hbs=require('hbs');
 const bodyParser=require('body-parser'); 
 const app=express();
+const jQuery=require('./public/js/libs/jquery-3.3.1.min.js')
 const lodash=require('lodash');
 const bcrypt=require('bcryptjs');
 const nodemailer=require('nodemailer');
@@ -15,6 +17,7 @@ const http=require("http");
 //this is built in module
 const socketIO=require("socket.io");
 const {generateMessage,generateLocationMessage}=require("./utils/message.js");
+const {document}=require('./views/contact.hbs')
 var server=http.createServer(app);
 //happens at the backside but this time we are using it here.
 var io=socketIO(server);
@@ -57,8 +60,9 @@ socket.on('createMessage',(message,callback)=>{
 // socket.on('createEmail',(email)=>{
 //     console.log("createEmail",email);
 // })
-socket.on('createLocationMessage',(coords)=>{
+socket.on('createLocationMessage',(coords,callback)=>{
     io.emit('newLocationMessage',generateLocationMessage('Admin',coords.latitude,coords.longitude));
+    callback();
 })
 socket.on('disconnect',()=>{
     console.log("user was disconnected");
@@ -77,16 +81,16 @@ app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({extended:false}))
 
 
+var getToken
 
-
-app.get('/registration',(req,res)=>{
+app.get('/',(req,res)=>{
 
 
     res.render('registration.hbs',{
         Login:"Login",
         exist:"",
         head:"Registration",
-        name:"name",
+        Register:"Register",
         email:"email Id",
         password:"Create Password",
         mob_no:"Mob _no."
@@ -97,7 +101,7 @@ app.get('/registration',(req,res)=>{
 
 })
 
-app.post('/registration',(req,res)=>{
+app.post('/',(req,res)=>{
       var body=lodash.pick(req.body,['email','password','name'])
      exists=""
     var user=new users(body);
@@ -108,9 +112,9 @@ app.post('/registration',(req,res)=>{
         return user.generateAuthToken();
        
     }).then((token)=>{
-               
+        res.redirect('/login');
                res.header('x-auth',token).render('home.hbs',{
-                name:"Hey "+user.name+" you have successfully",
+                name:"Hey "+user.name,
                 Login:"login",
                 type:"registered"
             });
@@ -135,11 +139,11 @@ app.post('/registration',(req,res)=>{
         
             res.render('registration.hbs',{
                 Login:"Login",
-
+                Register:"Register",
         passlength:message,
         exist:exists,
         head:"Registration",
-        name:"name",
+        Register:"Register",
         email:"email Id",
         password:"Create Password",
         mob_no:"Mob _no.",
@@ -153,7 +157,7 @@ app.post('/registration',(req,res)=>{
 app.get('/login',(req,res)=>{
     res.render('login.hbs',{
         Login:"Login",
-
+        Register:"Register",
         head:"Login",
         email:'Email_Id',
         password:'Password'
@@ -173,7 +177,17 @@ app.post('/login',(req,res)=>{
        bcrypt.compare(body.password,hashedpassword,(error,result)=>{
           
            if(result==true){
-        
+            app.get('/home',(req,res)=>{
+
+
+  
+                res.render('home.hbs',{
+                    title:"ProChat",
+                    Login:"Login",
+                 
+                });
+             
+             })
             getToken(userToken);
            }
            else if(result==false || error){
@@ -194,7 +208,7 @@ app.post('/login',(req,res)=>{
         console.log("e:"+e);
         res.render('login.hbs',{
             Login:"Login",
-
+            Register:"Register",
             head:"Login",
             email:'Email_Id',
             password:'Password',
@@ -224,7 +238,7 @@ app.post('/login',(req,res)=>{
         link3:"link3",
         loggedin:user.email,
         Login:"Logout",
-        name:"Hey "+user.name+" you have successfully",
+        name:user.email,
         type:"logged in"
     })
       console.log("user:"+user);
@@ -239,7 +253,7 @@ app.delete('/logout',authenticate,(req,res)=>{
      console.log("loaded successfully");
     res.render('home.hbs',{
         Login:"Login",
-        name:"Hey "+user.name+" you have successfully",
+        name:user.name,
         type:"logged out"
     })
  },(e)=>{
@@ -248,17 +262,31 @@ app.delete('/logout',authenticate,(req,res)=>{
      res.status(400).send(e);
  })
 })
-app.get('/',(req,res)=>{
-   // res.send("Home page");
+
+app.get('/home',authenticate,(req,res)=>{
+
+
+  
    res.render('home.hbs',{
        title:"ProChat",
-       Login:"Login"
-
+       Login:"Login",
+    
    });
 
-});
+})
+app.get('/home',(req,res)=>{
 
+
+  
+    res.render('home.hbs',{
+        title:"ProChat",
+        Login:"Login",
+     
+    });
+ 
+ })
 server.listen(port,()=>{
+    
     console.log(`server is up on the port ${port}`);
 })
 //earlier i used app.listen() which on backside call server.listen() by passing app as an argument in createServer() method 

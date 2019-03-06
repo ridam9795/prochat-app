@@ -1,0 +1,67 @@
+<html>
+    <head>
+        <title>
+            contact
+        </title>
+      
+    </head>
+   
+    
+    {{>header}}
+             
+
+    <body>
+        <style>
+            .column1 {
+  float: left;
+  width: 75%;
+  padding: 10px;
+  height: 300px; 
+
+  /* Should be removed. Only for demonstration */
+}
+      .column2 {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+        </style>
+        <div id="send-form">
+              <div class="row">
+                  <div class="column1">
+ <p id="myEmail">{{one}}</p>
+  <p id="myEmail">{{two}}</p>
+   <p id="myEmail">{{three}}</p>
+    <p id="myEmail">{{four}}</p>
+     <p id="myEmail">{{five}}</p>
+                  </div>
+                  <div class="column2">
+<button id="send-request">send request</button>
+<button id="send-request">send request</button>
+<button id="send-request">send request</button>
+<button id="send-request">send request</button>
+<button id="send-request">send request</button>
+                  </div>
+              </div>
+
+
+            <br>
+       
+
+       
+
+        </div>
+      
+       
+        <script src="./socket.io/socket.io.js"></script>
+      
+           
+    </body>
+</html>

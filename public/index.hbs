@@ -1,22 +1,90 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.navbar {
+  overflow: hidden;
+  background-color:rgb(111, 185, 145);
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color:brown;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: brown;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color:lemonchiffon;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color:red;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+</style>
         <title>
-            Home page
+            Prochat
         </title>
-         <style>
+        
+      <style>
       *{margin:0;padding:0;box-sizing:border-box}html{font-size:16px}input{font-size:14px}body{line-height:1.4;color:#333;font-family:Helvetica,Arial,sans-serif}h1{margin-bottom:16px}label{display:block;font-size:14px;margin-bottom:8px;color:#777}input{border:1px solid #eee;padding:12px;outline:none}button{cursor:pointer;padding:12px;background:#7C5CBF;border:none;color:#fff;font-size:16px;transition:background .3s ease}button:hover{background:#6b47b8}button:disabled{cursor:default;background:#7c5cbf94}.centered-form{background:#333744;width:100vw;height:100vh;display:flex;justify-content:center;align-items:center}.centered-form__box{box-shadow:0 0 17px 1px #1D1F26;background:#F7F7FA;padding:24px;width:250px}.centered-form button{width:100%}.centered-form input{margin-bottom:16px;width:100%}.chat{display:flex}.chat__sidebar{height:100vh;color:#fff;background:rgb(236, 170, 117);width:325px;overflow-y:scroll}.chat__main{flex-grow:1;display:flex;flex-direction:column;max-height:100vh}.chat__messages{flex-grow:1;padding:24px 24px 0;overflow-y:scroll}.message{margin-bottom:16px;background-color: rgb(77, 224, 224)}.message__name{font-weight:600;font-size:14px;margin-right:8px}.message__meta{color:#777;font-size:14px}.message a{color:#0070CC}.compose{display:flex;flex-shrink:0;margin-top:16px;padding:24px}.compose form{display:flex;flex-grow:1;margin-right:16px}.compose input{border:1px solid #eee;width:100%;padding:12px;margin:0 16px 0 0;flex-grow:1}.compose button{font-size:14px}.room-title{font-weight:400;font-size:22px;background:#2c2f3a;padding:24px}.list-title{font-weight:500;font-size:18px;margin-bottom:4px;padding:12px 24px 0}.users{list-style-type:none;font-weight:300;padding:12px 24px 0}
       </style>
     </head>
-            {{>header}}
-             
-  </div> 
-
     <body>
         
-     
-       <div class="chat">
+<div class="navbar" style="position:sticky;">
+        <a href="/">Home</a>
+        <a href="#contact">Contact</a>
+          <a href="/registration" style="position:absolute;right:10px;">Register</a>
+              <a  href="/login" style="position:absolute;right:100px;">Login</a>
+              </div>
+              <div class="chat">
                 <div class="chat__sidebar">
     
                 </div>
@@ -48,16 +116,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.6.0/qs.min.js"></script>
         <script src="./socket.io/socket.io.js"></script>
         <script src="./js/libs/jquery-3.3.1.min.js"></script>
-    <script src="./js/index.js">
+        <script src="./js/index.js">
        
         </script>
 
- <script src="./socket.io/socket.io.js"></script>
- <script>
-     var socket=io();
- </script>
- 
-
-        {{>footer}}
+    
     </body>
 </html>
