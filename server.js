@@ -175,7 +175,7 @@ app.post('/login',(req,res)=>{
        console.log(hashedpassword);
        console.log(body.password);
        bcrypt.compare(body.password,hashedpassword,(error,result)=>{
-          
+          console.log("................................................",user.email);
            if(result==true){
             app.get('/home',(req,res)=>{
 
@@ -183,7 +183,10 @@ app.post('/login',(req,res)=>{
   
                 res.render('home.hbs',{
                     title:"ProChat",
-                    Login:"Login",
+                    loggedin:user.email,
+                        Login:"Logout",
+                        name:user.email,
+                        type:"logged in"
                  
                 });
              
@@ -232,7 +235,7 @@ app.post('/login',(req,res)=>{
            return Promise.reject();
       }
       
-      res.render('home.hbs',{
+      res.render('join.hbs',{
         link1:"link1",
         link2:"link2",
         link3:"link3",
@@ -241,6 +244,8 @@ app.post('/login',(req,res)=>{
         name:user.email,
         type:"logged in"
     })
+ 
+
       console.log("user:"+user);
        }).catch((e)=>{
            console.log(e);
@@ -248,11 +253,12 @@ app.post('/login',(req,res)=>{
        })
     }
 });
+
 app.delete('/logout',authenticate,(req,res)=>{
  req.user.removeToken(req.token).then(()=>{
      console.log("loaded successfully");
     res.render('home.hbs',{
-        Login:"Login",
+        Login:"logout",
         name:user.name,
         type:"logged out"
     })
@@ -263,28 +269,8 @@ app.delete('/logout',authenticate,(req,res)=>{
  })
 })
 
-app.get('/home',authenticate,(req,res)=>{
 
 
-  
-   res.render('home.hbs',{
-       title:"ProChat",
-       Login:"Login",
-    
-   });
-
-})
-app.get('/home',(req,res)=>{
-
-
-  
-    res.render('home.hbs',{
-        title:"ProChat",
-        Login:"Login",
-     
-    });
- 
- })
 server.listen(port,()=>{
     
     console.log(`server is up on the port ${port}`);
